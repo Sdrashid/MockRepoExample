@@ -1,9 +1,7 @@
 package org.mock.mockitoweb;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class WebService {
 
@@ -17,7 +15,7 @@ public class WebService {
 		return number*number;
 	}
 	
-	public List<Employee> getEmployeeNameAsPerAge(Long age){
+	public List<Employee> getEmployeeNameAsPerAge(int age){
 		System.out.println("WebService:WebService.getEmployeeNameAsPerAge is called");
 		
 		List<Employee> employees = webRepository.getEmployees();
@@ -29,6 +27,27 @@ public class WebService {
 		for(Employee employee : employees) {
 			int returnAge = employee.getAge();
 			if(returnAge <= age) {
+				returnEmployees.add(employee);
+			}
+		}
+		
+		System.out.println("WebService: returnEmployees.size()"+returnEmployees.size());
+		return returnEmployees;
+		
+	}
+	
+	public List<Employee> getEmployeeNameAsPerSalary(Long salary){
+		System.out.println("WebService:WebService.getEmployeeNameAsPerAge is called");
+		
+		List<Employee> employees = webRepository.getEmployees();
+		
+		System.out.println("WebService:employees.size()"+employees.size());
+		
+		List<Employee> returnEmployees = new ArrayList<Employee>();
+		
+		for(Employee employee : employees) {
+			Long returnSalary = employee.getSalary();
+			if(returnSalary <= salary) {
 				returnEmployees.add(employee);
 			}
 		}
